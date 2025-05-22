@@ -6,13 +6,13 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\User;
 
-class LoginTest extends DuskTestCase
+class LogoutTest extends DuskTestCase
 {
     /**
-     * Test login success with valid credentials.
-     * @group login
+     * Test user can logout after login.
+     * @group logout
      */
-    public function test_user_can_login_with_valid_credentials()
+    public function test_user_can_logout()
     {
         $user = User::factory()->create([
             'email' => 'admin' . uniqid() . '@mail.com',
@@ -24,8 +24,13 @@ class LoginTest extends DuskTestCase
                 ->type('email', $user->email)
                 ->type('password', '123')
                 ->press('button[type=submit]')
-                ->pause(1000)
-                ->assertPathIs('/dashboard');
+                ->assertPathIs('/dashboard')
+                ->screenshot('after-login')
+                ->click('button.inline-flex.items-center')
+                ->pause(500)
+                ->screenshot('after-dropdown')
+                ->clickLink('Log Out')
+                ->assertPathIs('/');
         });
     }
 }

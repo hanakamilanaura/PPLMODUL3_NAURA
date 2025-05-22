@@ -13,7 +13,7 @@ class NoteController extends Controller
     public function index()
     {
         $notes_data = Note::with('penulis')
-                        ->where('penulis_id', auth()->id())
+                        ->where('penulis_id', Auth::id())
                         ->orderBy('updated_at', 'desc')
                         ->get();
         return view('Notes/index', compact('notes_data'));
@@ -60,9 +60,8 @@ class NoteController extends Controller
     
     public function edit($id)
     {
-        $note_edit = Note::findOrFail($id);
-
-        return view('Notes.edit', compact('note_edit'));
+        $note = Note::findOrFail($id);
+        return view('Notes.edit', compact('note'));
     }
 
     

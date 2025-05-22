@@ -20,7 +20,7 @@
         @endif
 
         <div class="form-note">
-            <form method="POST" action="{{route('note-update', $note_edit->id)}}">
+            <form method="POST" action="{{ route('note-update', $note->id) }}">
                 @csrf
                 @method('PUT')
                     <div class="" style="margin-bottom: 1.25rem;">
@@ -31,7 +31,7 @@
                                     color: #374151;">
                                     Title
                         </label>
-                        <input type="text" name="title" class="" value="{{$note_edit->judul}}" style="border-radius: 0.375rem; border-color: #D1D5DB; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); width:100%;"/>
+                        <input type="text" name="judul" class="" value="{{ $note->judul }}" style="border-radius: 0.375rem; border-color: #D1D5DB; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); width:100%;"/>
                     </div>
 
                     <div class="" style="margin-bottom: 1.25rem;">
@@ -42,8 +42,7 @@
                                     color: #374151;">
                                     Description
                         </label>
-                        {{-- <input type="text" name="title" class="" style= "border-radius: 0.375rem; border-color: #D1D5DB; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); width:100%;"/> --}}
-                        <textarea name="description" rows="4" cols="40" class="" 
+                        <textarea name="isi" rows="4" cols="40" class="" 
                         style="border-radius: 0.375rem; 
                         border: 1px solid #D1D5DB; 
                         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
@@ -51,7 +50,7 @@
                         padding: 0.5rem; 
                         font-family: inherit; 
                         white-space: pre-wrap;
-                        text-align: left;">{{ trim($note_edit->isi) }}</textarea>
+                        text-align: left;">{{ trim($note->isi) }}</textarea>
 
                         @error('description')
                             <p style="color: #ef4444; font-size: 12px; margin-top: 5px;">{{ $message }}</p>
